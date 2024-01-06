@@ -89,3 +89,8 @@ let animate = () => {
 }
 
 animate();
+
+setInterval(() => {
+    bal.push(newBall());
+    bal.splice(0, 1);
+}, 400);
