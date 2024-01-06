@@ -19,3 +19,9 @@ mousey.addEventListener("mouseover", (event) => {
 
 const grav = 0.99;
 c.lineWidth = 5;
+let randomColor = () => {
+    return("rgba(Math.round(Math.random() * 250) + "," + 
+                Math.round(Math.random() * 250) + "," + 
+                Math.round(Math.random() * 250) + "," + 
+                Math.ceiling(Math.random() * 10)/ 10)")
+}
