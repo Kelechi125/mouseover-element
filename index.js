@@ -2,8 +2,8 @@ console.log("Hello World!");
 
 const canvas = document.getElementById("canvas");
 const c = canvas.getContext("2d");
-const tx = window.innerWidth;
-const ty = window.innerHeight;
+let tx = window.innerWidth;
+let ty = window.innerHeight;
 canvas.width = tx;
 canvas.height = ty;
 
@@ -47,3 +47,45 @@ let bal = [];
 for (let i = 0; i < 50; i++) {
     bal.push(new Ball());
 }
+
+let animate = () => {
+    if (tx !== window.innerWidth || ty !== window.innerHeight) {
+        tx = window.innerWidth;
+        ty = window.innerHeight;
+        canvas.width = tx;
+        canvas.height = ty;
+    }
+    requestAnimationFrame(animate);
+    c.clearRect(0, 0, tx, ty);
+    for (let i = 0; i < bal.length; i++) {
+        bal[i].update();
+        bal[i].y += bal[1].dy;
+        bal[i].x += bal[1].dx;
+
+        if (bal[i].y + bal[i].radius >= ty) {
+            bal[i].dy = -bal[i].dy * grav;
+        } else {
+            bal[i].dy += bal[i].vel;
+        }
+
+        if (bal[i].x + bal[i].radius > tx || bal[i].x - bal[i].radius < 0) {
+            bal[i].dx = -bal[i].dx;
+        }
+
+        if (mousex > bal[i].x - 20 &&
+            mousex < bal[i].x + 20 &&
+            mousey > bal[i].y - 50 &&
+            moousey < bal[i].y + 50 &&
+            bal[i].radius < 70) {
+                bal[i].radius += 5
+            } else {
+                if (bal[i].radius > bal[i].startRadius) {
+                    bal[i].radius += -5;
+                }
+            }
+            // for loop ends
+    }
+    //animation ends
+}
+
+animate();
