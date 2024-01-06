@@ -10,12 +10,11 @@ canvas.height = ty;
 let mousex = 0;
 let mousey = 0;
 
-mousex.addEventListener("mousemove", (event) => {
+addEventListener("mouseover", event => {
     mousex = event.clientX;
+    mousey = event.clientY;
 })
-mousey.addEventListener("mouseover", (event) => {
-    mousex = event.clientY;
-})
+
 
 const grav = 0.99;
 c.lineWidth = 5;
