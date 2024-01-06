@@ -16,3 +16,6 @@ mousex.addEventListener("mousemove", (event) => {
 mousey.addEventListener("mouseover", (event) => {
     mousex = event.clientY;
 })
+
+const grav = 0.99;
+c.lineWidth = 5;
