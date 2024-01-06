@@ -6,3 +6,13 @@ const tx = window.innerWidth;
 const ty = window.innerHeight;
 canvas.width = tx;
 canvas.height = ty;
+
+let mousex = 0;
+let mousey = 0;
+
+mousex.addEventListener("mousemove", (event) => {
+    mousex = event.clientX;
+})
+mousey.addEventListener("mouseover", (event) => {
+    mousex = event.clientY;
+})
