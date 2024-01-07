@@ -74,7 +74,7 @@ let animate = () => {
         if (mousex > bal[i].x - 20 &&
             mousex < bal[i].x + 20 &&
             mousey > bal[i].y - 50 &&
-            moousey < bal[i].y + 50 &&
+            mousey < bal[i].y + 50 &&
             bal[i].radius < 70) {
                 bal[i].radius += 5
             } else {
