@@ -25,7 +25,7 @@ let randomColor = () => {
                     Math.ceiling(Math.random() * 10) / 10 + ")"
 }
 
-const Ball = () => {
+function Ball () {
     this.color = randomColor();
     this.radius = Math.random() * 20 + 14;
     this.startRadius = this.radius;
@@ -47,7 +47,7 @@ for (let i = 0; i < 50; i++) {
     bal.push(new Ball());
 }
 
-let animate = () => {
+function animate () {
     if (tx !== window.innerWidth || ty !== window.innerHeight) {
         tx = window.innerWidth;
         ty = window.innerHeight;
