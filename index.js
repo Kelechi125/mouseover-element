@@ -1,4 +1,4 @@
-console.log("Hello World!");
+console.log("Bloop!");
 
 const canvas = document.getElementById("canvas");
 const c = canvas.getContext("2d");
@@ -22,7 +22,7 @@ let randomColor = () => {
     return "rgb(" + Math.round(Math.random() * 250) + ',' + 
                     Math.round(Math.random() * 250) + ',' + 
                     Math.round(Math.random() * 250) + ',' + 
-                    Math.ceiling(Math.random() * 10) / 10 + ")"
+                    Math.ceil(Math.random() * 10) / 10 + ")"
 }
 
 function Ball () {
@@ -40,6 +40,7 @@ function Ball () {
         c.fillStyle = this.color;
         c.fill();
     };
+    
 }
 
 let bal = [];
