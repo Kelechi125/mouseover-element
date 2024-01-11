@@ -1,5 +1,3 @@
-console.log("Bloop!");
-
 const canvas = document.getElementById("canvas");
 const c = canvas.getContext("2d");
 let tx = window.innerWidth;
@@ -25,7 +23,7 @@ let randomColor = () => {
                     Math.ceil(Math.random() * 10) / 10 + ")"
 }
 
-function createBall () {
+/*function createBall () {
     this.color = randomColor();
     this.radius = Math.random() * 20 + 14;
     this.startRadius = this.radius;
@@ -41,6 +39,24 @@ function createBall () {
         c.fill();
     };
     
+}*/
+
+class createBall {
+    constructor (x, y, dx, dy, radius) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.radius = radius;
+    this.color = randomColor();
+    }
+
+    draw() {
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+        c.fillStyle = this.color;
+        c.fill();
+    }
 }
 
 let bal = [];
@@ -89,6 +105,8 @@ function animate () {
 }
 
 animate();
+
+console.log(animate());
 
 setInterval(() => {
     bal.push(new createBall());
