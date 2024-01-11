@@ -25,7 +25,7 @@ let randomColor = () => {
                     Math.ceil(Math.random() * 10) / 10 + ")"
 }
 
-function Ball () {
+function createBall () {
     this.color = randomColor();
     this.radius = Math.random() * 20 + 14;
     this.startRadius = this.radius;
@@ -44,8 +44,8 @@ function Ball () {
 }
 
 let bal = [];
-for (let i = 0; i < 50; i++) {
-    bal.push(new Ball());
+for (let i = 0; i < 5; i++) {
+    bal.push(new createBall());
 }
 
 function animate () {
@@ -91,6 +91,6 @@ function animate () {
 animate();
 
 setInterval(() => {
-    bal.push(newBall());
+    bal.push(new createBall());
     bal.splice(0, 1);
 }, 400);
