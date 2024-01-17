@@ -15,12 +15,10 @@ addEventListener("mouseover", event => {
 
 
 const grav = 0.99;
+
 c.lineWidth = 5;
 let randomColor = () => {
-    return "rgb(" + Math.round(Math.random() * 250) + ',' + 
-                    Math.round(Math.random() * 250) + ',' + 
-                    Math.round(Math.random() * 250) + ',' + 
-                    Math.ceil(Math.random() * 10) / 10 + ")"
+    return `rgba(${Math.round(Math.random() * 250)}, ${Math.round(Math.random() * 250)}, ${Math.round(Math.random() * 250)}, ${Math.ceil(Math.random() * 10) / 10})`;
 }
 
 /*function createBall () {
@@ -41,28 +39,34 @@ let randomColor = () => {
     
 }*/
 
+//class to create circles
 class createBall {
-    constructor (x, y, dx, dy, radius) {
-    this.x = x;
-    this.y = y;
-    this.dx = dx;
-    this.dy = dy;
-    this.radius = radius;
-    this.color = randomColor();
+    constructor (/*x, y, dx, dy, radius*/) {
+        this.x = Math.random() * (tx - this.radius * 2) + this.radius;
+        this.y = Math.random() * (ty - this.radius);
+        this.dx = Math.round((Math.random() * 0.5) * 10);
+        this.dy = Math.random() * 2;
+        this.radius = Math.random() * 20 + 14;
+        this.startRadius = this.radius;
+        this.color = randomColor();
     }
-
+//method for drawing the circles
     draw() {
         c.beginPath();
-        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
         c.fillStyle = this.color;
         c.fill();
+        //c.closePath();
     }
 }
 
-let bal = [];
+//initializes the circles
+/*let circles = [];
 for (let i = 0; i < 5; i++) {
-    bal.push(new createBall());
-}
+    circles.push(new createBall());
+}*/
+
+const circles = Array.from({ length: 50 }, () => new createBall());
 
 function animate () {
     if (tx !== window.innerWidth || ty !== window.innerHeight) {
@@ -73,30 +77,30 @@ function animate () {
     }
     requestAnimationFrame(animate);
     c.clearRect(0, 0, tx, ty);
-    for (let i = 0; i < bal.length; i++) {
-        bal[i].update();
-        bal[i].y += bal[1].dy;
-        bal[i].x += bal[1].dx;
+    for (const circle of circles) {
+        circle.update();
+        circle.y += circle.dy;
+        circle.x += circle.dx;
 
-        if (bal[i].y + bal[i].radius >= ty) {
-            bal[i].dy = -bal[i].dy * grav;
+        if (circle.y + circle.radius >= ty) {
+            circle.dy = -circle.dy * grav;
         } else {
-            bal[i].dy += bal[i].vel;
+            circle.dy += circle.vel;
         }
 
-        if (bal[i].x + bal[i].radius > tx || bal[i].x - bal[i].radius < 0) {
-            bal[i].dx = -bal[i].dx;
+        if (circle.x + circle.radius > tx || circle.x - circle.radius < 0) {
+            circle.dx = -circle.dx;
         }
 
-        if (mousex > bal[i].x - 20 &&
-            mousex < bal[i].x + 20 &&
-            mousey > bal[i].y - 50 &&
-            mousey < bal[i].y + 50 &&
-            bal[i].radius < 70) {
-                bal[i].radius += 5
+        if (mousex > circle.x - 20 &&
+            mousex < circle.x + 20 &&
+            mousey > circle.y - 50 &&
+            mousey < circle.y + 50 &&
+            circle.radius < 70) {
+                circle.radius += 5
             } else {
-                if (bal[i].radius > bal[i].startRadius) {
-                    bal[i].radius += -5;
+                if (circle.radius > circle.startRadius) {
+                    circle.radius += -5;
                 }
             }
             // for loop ends
@@ -106,9 +110,7 @@ function animate () {
 
 animate();
 
-console.log(animate());
-
 setInterval(() => {
     bal.push(new createBall());
-    bal.splice(0, 1);
+    bal.shift();
 }, 400);
