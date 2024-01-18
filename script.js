@@ -18,7 +18,10 @@ const grav = 0.99;
 
 c.lineWidth = 5;
 let randomColor = () => {
-    return `rgba(${Math.round(Math.random() * 250)}, ${Math.round(Math.random() * 250)}, ${Math.round(Math.random() * 250)}, ${Math.ceil(Math.random() * 10) / 10})`;
+    return `rgba(${Math.round(Math.random() * 250)}, 
+    ${Math.round(Math.random() * 250)}, 
+    ${Math.round(Math.random() * 250)}, 
+    ${Math.ceil(Math.random() * 10) / 10})`;
 }
 
 /*function createBall () {
@@ -56,7 +59,7 @@ class createBall {
         c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
         c.fillStyle = this.color;
         c.fill();
-        //c.closePath();
+        c.closePath();
     }
 }
 
@@ -66,7 +69,7 @@ for (let i = 0; i < 5; i++) {
     circles.push(new createBall());
 }*/
 
-const circles = Array.from({ length: 50 }, () => new createBall());
+const circles = /*Array.from({ length: 50 }, () => new createBall());*/ new createBall();
 
 function animate () {
     if (tx !== window.innerWidth || ty !== window.innerHeight) {
@@ -78,7 +81,7 @@ function animate () {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, tx, ty);
     for (const circle of circles) {
-        circle.update();
+        createBall.draw();
         circle.y += circle.dy;
         circle.x += circle.dx;
 
@@ -111,6 +114,6 @@ function animate () {
 animate();
 
 setInterval(() => {
-    bal.push(new createBall());
-    bal.shift();
+    circles.push(new createBall());
+    circles.shift();
 }, 400);
